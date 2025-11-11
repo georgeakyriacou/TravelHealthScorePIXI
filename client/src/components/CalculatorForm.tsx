@@ -72,7 +72,7 @@ export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFo
                 </FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
-                    <SelectTrigger className="text-lg" data-testid="select-portfolio">
+                    <SelectTrigger data-testid="select-portfolio">
                       <SelectValue placeholder="Select portfolio size" />
                     </SelectTrigger>
                   </FormControl>
