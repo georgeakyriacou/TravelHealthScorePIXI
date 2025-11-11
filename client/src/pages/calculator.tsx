@@ -5,7 +5,6 @@ import ScoreDisplay from "@/components/ScoreDisplay";
 import MetricsBreakdown from "@/components/MetricsBreakdown";
 import { calculatePCC } from "@/lib/calculator";
 import type { CalculatorResult } from "@shared/schema";
-import { Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function CalculatorPage() {
@@ -34,20 +33,10 @@ export default function CalculatorPage() {
       <div className="max-w-5xl mx-auto px-4 md:px-6 lg:px-8 py-12 md:py-16">
         <div className="space-y-8">
           <div className="text-center space-y-4">
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 text-primary"
-            >
-              <Sparkles className="h-6 w-6" />
-              <span className="text-sm font-semibold tracking-wide uppercase">PIXIgroup.ai</span>
-            </motion.div>
-            
             <motion.h1
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              transition={{ duration: 0.6 }}
               className="text-3xl md:text-4xl font-bold"
             >
               Travel Content Health Score
@@ -56,7 +45,7 @@ export default function CalculatorPage() {
             <motion.p
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
               className="text-base text-muted-foreground max-w-2xl mx-auto"
             >
               Calculate your Travel Content Health Score - a diagnostic measure of your content
@@ -67,7 +56,7 @@ export default function CalculatorPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
             <Card className="p-8">
               <div className="space-y-2 mb-6">
