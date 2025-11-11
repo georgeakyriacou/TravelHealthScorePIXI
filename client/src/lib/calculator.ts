@@ -12,20 +12,35 @@ const CONSTANTS = {
   MAX_OPPORTUNITY_BENCHMARK: 500000,
 };
 
+function getPropertyCount(portfolioSize: string): number {
+  switch (portfolioSize) {
+    case "single":
+      return 1;
+    case "small":
+      return 3;
+    case "large":
+      return 8;
+    default:
+      return 2;
+  }
+}
+
 export function calculatePCC(input: CalculatorFormValues): CalculatorResult {
+  const properties = getPropertyCount(input.portfolioSize);
+  
   const avgHourlyRate = CONSTANTS.AVG_SM_ANNUAL_SALARY / CONSTANTS.ANNUAL_WORKING_HOURS;
   
   const annualWastedHours = input.hoursPerWeek * 52;
   
   const laborCostDrain = avgHourlyRate * annualWastedHours;
   
-  const totalContentBudget = input.annualBudget * input.properties;
+  const totalContentBudget = input.annualBudget * properties;
   
   const contentAtRisk = totalContentBudget * CONSTANTS.CONSERVATIVE_RISK_FACTOR;
   
   const bookingValue = input.adr * CONSTANTS.AVERAGE_LENGTH_OF_STAY;
   
-  const totalOpportunity = bookingValue * CONSTANTS.INCREMENTAL_BOOKINGS_PER_PROPERTY * input.properties;
+  const totalOpportunity = bookingValue * CONSTANTS.INCREMENTAL_BOOKINGS_PER_PROPERTY * properties;
   
   const maxLaborCost = 50000;
   const productivityScore = Math.max(0, 30 * (1 - laborCostDrain / maxLaborCost));

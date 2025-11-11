@@ -46,7 +46,7 @@ export default function ScoreDisplay({ score, className }: ScoreDisplayProps) {
     <Card className={`p-10 md:p-12 ${className}`}>
       <div className="text-center space-y-6">
         <div className="space-y-2">
-          <h2 className="text-2xl font-semibold">Your PIXI Content Co-efficient</h2>
+          <h2 className="text-2xl font-semibold">Your Travel Content Health Score</h2>
           <p className="text-sm text-muted-foreground">
             A diagnostic measure of your travel content health
           </p>

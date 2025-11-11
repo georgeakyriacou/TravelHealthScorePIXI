@@ -59,8 +59,8 @@ export default function CalculatorPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-base text-muted-foreground max-w-2xl mx-auto"
             >
-              Calculate your PIXI Content Co-efficient (PCC) - a diagnostic measure of your content
-              management efficiency. Discover hidden costs and revenue opportunities.
+              Calculate your Travel Content Health Score - a diagnostic measure of your content
+              management efficiency. Discover hidden costs and revenue opportunities with PIXI.
             </motion.p>
           </div>
 

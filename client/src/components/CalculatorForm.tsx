@@ -12,10 +12,17 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Building2, Coins, Clock, FileText } from "lucide-react";
 
 const formSchema = z.object({
-  properties: z.coerce.number().min(1, "At least 1 property required").max(100),
+  portfolioSize: z.string().min(1, "Please select your portfolio size"),
   adr: z.coerce.number().min(1, "ADR must be greater than 0"),
   hoursPerWeek: z.coerce.number().min(0).max(168, "Max 168 hours in a week"),
   annualBudget: z.coerce.number().min(0),
@@ -32,7 +39,7 @@ export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFo
   const form = useForm<CalculatorFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      properties: 2,
+      portfolioSize: "small",
       adr: 1000,
       hoursPerWeek: 5,
       annualBudget: 20000,
@@ -45,24 +52,27 @@ export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFo
         <div className="grid md:grid-cols-2 gap-6">
           <FormField
             control={form.control}
-            name="properties"
+            name="portfolioSize"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-sm font-medium flex items-center gap-2">
                   <Building2 className="h-4 w-4 text-muted-foreground" />
-                  Number of Properties
+                  Which best describes your portfolio?
                 </FormLabel>
-                <FormControl>
-                  <Input
-                    type="number"
-                    placeholder="2"
-                    {...field}
-                    data-testid="input-properties"
-                    className="text-lg"
-                  />
-                </FormControl>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger className="text-lg" data-testid="select-portfolio">
+                      <SelectValue placeholder="Select portfolio size" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="single">A single property</SelectItem>
+                    <SelectItem value="small">A small group (2-5 properties)</SelectItem>
+                    <SelectItem value="large">A large group (6+ properties)</SelectItem>
+                  </SelectContent>
+                </Select>
                 <FormDescription className="text-xs">
-                  How many properties do you manage?
+                  Select the option that best fits your portfolio
                 </FormDescription>
                 <FormMessage />
               </FormItem>
