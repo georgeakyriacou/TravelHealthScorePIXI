@@ -100,7 +100,7 @@ export default function MetricsBreakdown({
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.5 }}
       >
-        <Card className="p-8 bg-primary/5 border-primary/20">
+        <Card className="p-8" style={{ backgroundColor: '#F2EDE9' }}>
           <div className="text-center space-y-4">
             <div className="flex items-center justify-center gap-2">
               <Target className="h-5 w-5 text-primary" />
