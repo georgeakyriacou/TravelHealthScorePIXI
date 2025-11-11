@@ -35,6 +35,17 @@ interface CalculatorFormProps {
   isCalculating?: boolean;
 }
 
+function formatNumberWithCommas(value: string | number): string {
+  const num = typeof value === 'string' ? value.replace(/,/g, '') : value.toString();
+  const parts = num.split('.');
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return parts.join('.');
+}
+
+function parseFormattedNumber(value: string): string {
+  return value.replace(/,/g, '');
+}
+
 export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFormProps) {
   const form = useForm<CalculatorFormValues>({
     resolver: zodResolver(formSchema),
@@ -90,9 +101,13 @@ export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFo
                 </FormLabel>
                 <FormControl>
                   <Input
-                    type="number"
-                    placeholder="1000"
-                    {...field}
+                    type="text"
+                    placeholder="1,000"
+                    value={formatNumberWithCommas(field.value || '')}
+                    onChange={(e) => {
+                      const parsed = parseFormattedNumber(e.target.value);
+                      field.onChange(parsed);
+                    }}
                     data-testid="input-adr"
                     className="text-lg"
                   />
@@ -142,9 +157,13 @@ export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFo
                 </FormLabel>
                 <FormControl>
                   <Input
-                    type="number"
-                    placeholder="20000"
-                    {...field}
+                    type="text"
+                    placeholder="20,000"
+                    value={formatNumberWithCommas(field.value || '')}
+                    onChange={(e) => {
+                      const parsed = parseFormattedNumber(e.target.value);
+                      field.onChange(parsed);
+                    }}
                     data-testid="input-budget"
                     className="text-lg"
                   />
