@@ -21,7 +21,7 @@ function formatCurrency(value: number): string {
 }
 
 function formatPercent(value: number): string {
-  return `${value.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%`;
+  return `${Math.ceil(value).toLocaleString('en-GB')}%`;
 }
 
 export default function MetricsBreakdown({
@@ -101,19 +101,17 @@ export default function MetricsBreakdown({
         transition={{ delay: 0.5, duration: 0.5 }}
       >
         <Card className="p-8 bg-primary/5 border-primary/20">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <Target className="h-5 w-5 text-primary" />
-                <h3 className="text-lg font-semibold">Revenue at Stake per Booking</h3>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Every day an advisor waits for content, this revenue is at risk
-              </p>
+          <div className="text-center space-y-4">
+            <div className="flex items-center justify-center gap-2">
+              <Target className="h-5 w-5 text-primary" />
+              <h3 className="text-lg font-semibold">Revenue at Stake per Booking</h3>
             </div>
-            <div className="text-3xl font-bold font-mono text-primary" data-testid="text-booking-value">
+            <div className="text-4xl md:text-5xl font-bold font-mono text-primary" data-testid="text-booking-value">
               {formatCurrency(bookingValue)}
             </div>
+            <p className="text-sm text-muted-foreground">
+              Every day an advisor waits for content, this revenue is at risk
+            </p>
           </div>
         </Card>
       </motion.div>
