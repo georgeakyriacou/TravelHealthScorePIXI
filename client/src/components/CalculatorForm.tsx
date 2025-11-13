@@ -106,7 +106,8 @@ export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFo
                     value={formatNumberWithCommas(field.value || '')}
                     onChange={(e) => {
                       const parsed = parseFormattedNumber(e.target.value);
-                      field.onChange(parsed);
+                      const numValue = parsed === '' ? '' : Number(parsed);
+                      field.onChange(numValue);
                     }}
                     data-testid="input-adr"
                     className="text-lg"
@@ -162,7 +163,8 @@ export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFo
                     value={formatNumberWithCommas(field.value || '')}
                     onChange={(e) => {
                       const parsed = parseFormattedNumber(e.target.value);
-                      field.onChange(parsed);
+                      const numValue = parsed === '' ? '' : Number(parsed);
+                      field.onChange(numValue);
                     }}
                     data-testid="input-budget"
                     className="text-lg"
