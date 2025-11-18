@@ -132,23 +132,27 @@ export default function ScoreDisplay({ score, className }: ScoreDisplayProps) {
             <div className="space-y-2.5 text-xs text-muted-foreground">
               <div className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                <p>Average commercial manager salary: £45,000/year</p>
+                <p>Average S&M Director salary: £82,500/year</p>
               </div>
               <div className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                <p>PIXI subscription: £30,000/year</p>
+                <p>PIXI subscription (Medium plan): £5,100/year</p>
               </div>
               <div className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                <p>Average booking conversion: 15%</p>
+                <p>Working days per year: 220</p>
               </div>
               <div className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                <p>Content-driven discovery increase: 25%</p>
+                <p>Average length of stay: 5 days</p>
               </div>
               <div className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                <p>Brand inconsistency cost: 10% of content budget</p>
+                <p>Conservative risk factor: 10% of content budget</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                <p>Target incremental bookings: 20 per property</p>
               </div>
             </div>
           </div>
