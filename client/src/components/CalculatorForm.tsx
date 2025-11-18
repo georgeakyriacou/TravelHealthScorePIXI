@@ -128,7 +128,7 @@ export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFo
               <FormItem>
                 <FormLabel className="text-sm font-medium flex items-center gap-2">
                   <Clock className="h-4 w-4 text-muted-foreground" />
-                  How many hours per week is your Commercial team wasting on manual asset requests?
+                  How many hours per week ( per property our team wasting on manual asset requests?
                 </FormLabel>
                 <FormControl>
                   <Input
