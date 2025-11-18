@@ -204,7 +204,7 @@ export default function ScoreDisplay({ score, className }: ScoreDisplayProps) {
               <div className="flex items-start justify-between gap-2">
                 <div className="flex items-start gap-2 flex-1">
                   <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                  <p>PIXI subscription (Medium plan): £5,100/year</p>
+                  <p>PIXI subscription (Medium plan)</p>
                 </div>
                 <Tooltip>
                   <TooltipTrigger asChild>
