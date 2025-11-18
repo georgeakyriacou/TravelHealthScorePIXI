@@ -52,7 +52,7 @@ export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFo
     resolver: zodResolver(formSchema),
     defaultValues: {
       portfolioSize: "single",
-      roomKeys: undefined,
+      roomKeys: 0,
       adr: 1000,
       hoursPerWeek: 5,
       annualBudget: 20000,
