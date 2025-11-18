@@ -55,7 +55,7 @@ export default function MetricsBreakdown({
                 {formatCurrency(laborCostDrain)}
               </div>
               <p className="text-sm text-muted-foreground">
-                The amount of money your team is wasting on admin from high-value labour.
+                The amount of money your team wastes on high-value staff manually sending links and files
               </p>
             </div>
           </Card>
