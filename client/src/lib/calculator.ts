@@ -5,11 +5,17 @@ const CONSTANTS = {
   WORKING_DAYS_PER_YEAR: 220,
   AVG_SM_ANNUAL_SALARY: 82500,
   ANNUAL_WORKING_HOURS: 1760,
-  AVG_ANNUAL_PIXI_COST: 5100,
   CONSERVATIVE_RISK_FACTOR: 0.1,
   AVERAGE_LENGTH_OF_STAY: 5,
   INCREMENTAL_BOOKINGS_PER_PROPERTY: 20,
   MAX_OPPORTUNITY_BENCHMARK: 500000,
+};
+
+const PIXI_PRICING = {
+  SMALL: 2040,
+  MEDIUM: 5100,
+  LARGE: 7140,
+  ENTERPRISE: 5100,
 };
 
 function getPropertyCount(portfolioSize: string): number {
@@ -23,6 +29,24 @@ function getPropertyCount(portfolioSize: string): number {
     default:
       return 2;
   }
+}
+
+function getPixiCost(portfolioSize: string, roomKeys?: number): number {
+  if (portfolioSize === "small" || portfolioSize === "large") {
+    return PIXI_PRICING.ENTERPRISE;
+  }
+  
+  if (portfolioSize === "single" && roomKeys !== undefined && roomKeys !== null) {
+    if (roomKeys <= 25) {
+      return PIXI_PRICING.SMALL;
+    } else if (roomKeys <= 80) {
+      return PIXI_PRICING.MEDIUM;
+    } else {
+      return PIXI_PRICING.LARGE;
+    }
+  }
+  
+  return PIXI_PRICING.MEDIUM;
 }
 
 export function calculatePCC(input: CalculatorFormValues): CalculatorResult {
@@ -51,8 +75,9 @@ export function calculatePCC(input: CalculatorFormValues): CalculatorResult {
   
   const pccScore = Math.round(productivityScore + consistencyIndex + discoveryValueScore);
   
+  const pixiCost = getPixiCost(input.portfolioSize, input.roomKeys);
   const totalGain = laborCostDrain + totalOpportunity + contentAtRisk;
-  const roiPotential = (totalGain / CONSTANTS.AVG_ANNUAL_PIXI_COST) * 100;
+  const roiPotential = (totalGain / pixiCost) * 100;
 
   return {
     pccScore,
@@ -64,5 +89,6 @@ export function calculatePCC(input: CalculatorFormValues): CalculatorResult {
     contentAtRisk,
     bookingValue,
     roiPotential,
+    pixiCost,
   };
 }

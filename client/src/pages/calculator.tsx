@@ -76,7 +76,7 @@ export default function CalculatorPage() {
 
           {result && (
             <div id="results" className="space-y-8 scroll-mt-8">
-              <ScoreDisplay score={result.pccScore} />
+              <ScoreDisplay score={result.pccScore} pixiCost={result.pixiCost} />
               
               <div className="space-y-4">
                 <motion.div

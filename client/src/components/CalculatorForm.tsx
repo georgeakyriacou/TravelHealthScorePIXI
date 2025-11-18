@@ -27,6 +27,14 @@ const formSchema = z.object({
   adr: z.coerce.number().min(1, "ADR must be greater than 0"),
   hoursPerWeek: z.coerce.number().min(0).max(168, "Max 168 hours in a week"),
   annualBudget: z.coerce.number().min(0),
+}).refine((data) => {
+  if (data.portfolioSize === "single") {
+    return data.roomKeys !== undefined && data.roomKeys !== null && data.roomKeys >= 1;
+  }
+  return true;
+}, {
+  message: "Please enter at least 1 room key for single property",
+  path: ["roomKeys"],
 });
 
 export type CalculatorFormValues = z.infer<typeof formSchema>;
@@ -52,7 +60,7 @@ export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFo
     resolver: zodResolver(formSchema),
     defaultValues: {
       portfolioSize: "single",
-      roomKeys: 0,
+      roomKeys: 50,
       adr: 1000,
       hoursPerWeek: 5,
       annualBudget: 20000,

@@ -36,4 +36,5 @@ export interface CalculatorResult {
   contentAtRisk: number;
   bookingValue: number;
   roiPotential: number;
+  pixiCost: number;
 }

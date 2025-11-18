@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 interface ScoreDisplayProps {
   score: number;
+  pixiCost: number;
   className?: string;
 }
 
@@ -17,7 +18,23 @@ function getScoreStatus(score: number) {
   return { label: "Poor", color: "bg-red-500", icon: XCircle };
 }
 
-export default function ScoreDisplay({ score, className }: ScoreDisplayProps) {
+function getTierName(pixiCost: number): string {
+  if (pixiCost === 2040) return "Small";
+  if (pixiCost === 5100) return "Medium";
+  if (pixiCost === 7140) return "Large";
+  return "Medium";
+}
+
+function formatCurrency(value: number): string {
+  return new Intl.NumberFormat('en-GB', {
+    style: 'currency',
+    currency: 'GBP',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(value);
+}
+
+export default function ScoreDisplay({ score, pixiCost, className }: ScoreDisplayProps) {
   const [displayScore, setDisplayScore] = useState(0);
   const status = getScoreStatus(score);
   const Icon = status.icon;
@@ -204,14 +221,14 @@ export default function ScoreDisplay({ score, className }: ScoreDisplayProps) {
               <div className="flex items-start justify-between gap-2">
                 <div className="flex items-start gap-2 flex-1">
                   <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                  <p>PIXI subscription (Medium plan)</p>
+                  <p>PIXI subscription ({getTierName(pixiCost)} plan): {formatCurrency(pixiCost)}/year</p>
                 </div>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Info className="h-3.5 w-3.5 flex-shrink-0 mt-1 cursor-help" />
                   </TooltipTrigger>
                   <TooltipContent className="max-w-xs">
-                    <p className="text-xs">Based on a 'Medium' plan subscription cost with PIXI.</p>
+                    <p className="text-xs">Based on your recommended subscription tier for this ROI calculation.</p>
                   </TooltipContent>
                 </Tooltip>
               </div>
