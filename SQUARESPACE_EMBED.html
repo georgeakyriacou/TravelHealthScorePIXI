@@ -11,7 +11,7 @@
     id="pixi-calculator-iframe"
     src="YOUR_PUBLISHED_URL_HERE"
     width="100%"
-    style="border: none; overflow: hidden; min-height: 800px; transition: height 0.3s ease;"
+    style="border: none; overflow: hidden; min-height: 800px; transition: height 0.3s ease; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);"
     scrolling="no"
     title="PIXI Travel Content Health Score Calculator"
   ></iframe>
@@ -45,16 +45,19 @@
 </script>
 
 <style>
-/* Optional: Add some spacing around the calculator */
+/* Styling for the calculator iframe */
 #pixi-calculator-iframe {
   display: block;
   width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   #pixi-calculator-iframe {
     min-height: 1000px;
+    border-radius: 12px;
   }
 }
 </style>
