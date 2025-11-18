@@ -50,7 +50,7 @@ export default function SubscriptionRecommendation({
     >
       <Card className="p-8">
         <div className="space-y-6">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col items-center gap-3 text-center">
             <div className="p-2 rounded-lg bg-primary/10">
               <Sparkles className="h-5 w-5 text-primary" />
             </div>
@@ -60,15 +60,14 @@ export default function SubscriptionRecommendation({
           {isEnterprise ? (
             <div className="space-y-4">
               <div className="text-center py-8 space-y-4">
-                <Badge className="text-lg px-6 py-2 bg-primary text-primary-foreground">
+                <div className="text-lg font-semibold text-primary">
                   Enterprise Level
-                </Badge>
+                </div>
                 <p className="text-muted-foreground max-w-md mx-auto">
                   Please book a bespoke demo with our Sales team
                 </p>
                 <div className="pt-4">
                   <Button
-                    size="lg"
                     className="gap-2"
                     data-testid="button-book-demo"
                     asChild
@@ -86,18 +85,13 @@ export default function SubscriptionRecommendation({
               </div>
             </div>
           ) : tier ? (
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <Badge
-                    className="text-base px-4 py-1 bg-primary text-primary-foreground mb-2"
-                    data-testid="badge-tier-name"
-                  >
-                    {tier.name} Plan
-                  </Badge>
-                  <p className="text-sm text-muted-foreground">{tier.description}</p>
+            <div className="space-y-6 text-center">
+              <div className="space-y-3">
+                <div className="text-lg font-semibold text-primary" data-testid="text-tier-name">
+                  {tier.name} Plan
                 </div>
-                <div className="text-right">
+                <p className="text-sm text-muted-foreground max-w-2xl mx-auto">{tier.description}</p>
+                <div className="pt-2">
                   <p className="text-2xl font-bold" data-testid="text-tier-price">
                     {tier.price}
                   </p>
@@ -105,10 +99,9 @@ export default function SubscriptionRecommendation({
                 </div>
               </div>
 
-              <div className="pt-2">
+              <div>
                 <Button
-                  size="lg"
-                  className="w-full gap-2"
+                  className="gap-2"
                   data-testid="button-start-trial"
                   asChild
                 >
@@ -117,7 +110,7 @@ export default function SubscriptionRecommendation({
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Start Free Trial
+                    Start Free 14-Day Trial
                     <ExternalLink className="h-4 w-4" />
                   </a>
                 </Button>
