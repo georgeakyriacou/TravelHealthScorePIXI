@@ -101,18 +101,18 @@ export default function CalculatorPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.2 }}
               >
-                <Card className="p-8 text-center bg-card">
-                  <div className="space-y-4">
-                    <h3 className="text-xl font-semibold">Ready to Improve Your Score?</h3>
-                    <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
+                <Card className="p-12 md:p-16 text-center bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5 border-primary/20 shadow-lg">
+                  <div className="space-y-6">
+                    <h3 className="text-3xl md:text-4xl font-bold">Ready to Improve Your Score?</h3>
+                    <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
                       Your content deserves to be discovered. With PIXI, you elevate your story, expand your audience, and protect the integrity of your brand. Let's bring your content to its full potential.
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                       <a
                         href="https://www.pixigroup.ai/book-a-demo?utm_source=PIXI+website+&utm_medium=website+&utm_campaign=roi_calculator&utm_id=roi"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-6 py-3 bg-primary text-primary-foreground rounded-md font-medium hover-elevate active-elevate-2 outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                        className="px-8 py-4 bg-primary text-primary-foreground rounded-md font-semibold text-lg hover-elevate active-elevate-2 outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                         data-testid="button-demo"
                       >
                         Schedule a Demo
@@ -121,10 +121,10 @@ export default function CalculatorPage() {
                         href="https://www.pixigroup.ai/pricing-plan?utm_source=PIXI+website+&utm_medium=website+&utm_campaign=roi_calculator&utm_id=roi"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-6 py-3 border border-border rounded-md font-medium hover-elevate active-elevate-2 outline-none focus-visible:ring-2 focus-visible:ring-border focus-visible:ring-offset-2"
+                        className="px-8 py-4 border-2 border-primary bg-background text-primary rounded-md font-semibold text-lg hover-elevate active-elevate-2 outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                         data-testid="button-learn"
                       >
-                        Learn More
+                        Get PIXI
                       </a>
                     </div>
                   </div>

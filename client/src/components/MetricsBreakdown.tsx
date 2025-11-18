@@ -32,89 +32,51 @@ export default function MetricsBreakdown({
   roiPotential,
   className,
 }: MetricsBreakdownProps) {
-  const metrics = [
-    {
-      title: "Productivity Loss",
-      value: formatCurrency(laborCostDrain),
-      description: "The amount of money your team is wasting on admin from high-value labour.",
-      icon: AlertTriangle,
-      color: "text-red-500",
-      delay: 0.2,
-    },
-    {
-      title: "Discovery Opportunity",
-      value: formatCurrency(totalOpportunity),
-      description: "This is the estimated incremental revenue PIXI can generate by maximising your content reach.",
-      icon: TrendingUp,
-      color: "text-green-500",
-      delay: 0.3,
-    },
-    {
-      title: "The Content Investment Index",
-      value: formatCurrency(contentAtRisk),
-      description: "The annual estimated cost from inconsistent branding and slow velocity.",
-      icon: DollarSign,
-      color: "text-amber-500",
-      delay: 0.4,
-    },
-  ];
-
   return (
     <div className={`space-y-6 ${className}`}>
-      <div className="grid md:grid-cols-3 gap-6">
-        {metrics.map((metric, index) => {
-          const Icon = metric.icon;
-          return (
-            <motion.div
-              key={metric.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: metric.delay, duration: 0.5 }}
-            >
-              <Card className="p-6 space-y-3 hover-elevate">
-                <div className="flex items-start justify-between">
-                  <div className="space-y-1 flex-1">
-                    <p className="text-sm font-medium text-muted-foreground">
-                      {metric.title}
-                    </p>
-                    <p
-                      className="text-2xl font-semibold font-mono"
-                      data-testid={`text-metric-${index}`}
-                    >
-                      {metric.value}
-                    </p>
-                  </div>
-                  <Icon className={`h-5 w-5 ${metric.color} flex-shrink-0`} />
-                </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  {metric.description}
-                </p>
-              </Card>
-            </motion.div>
-          );
-        })}
-      </div>
+      <div className="grid md:grid-cols-2 gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          <Card className="p-8" style={{ backgroundColor: '#F2EDE9' }}>
+            <div className="text-center space-y-4">
+              <div className="flex items-center justify-center gap-2">
+                <AlertTriangle className="h-5 w-5 text-red-500" />
+                <h3 className="text-lg font-semibold">Productivity Loss</h3>
+              </div>
+              <div className="text-4xl md:text-5xl font-bold font-mono text-red-500" data-testid="text-metric-0">
+                {formatCurrency(laborCostDrain)}
+              </div>
+              <p className="text-sm text-muted-foreground">
+                The amount of money your team is wasting on admin from high-value labour.
+              </p>
+            </div>
+          </Card>
+        </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-      >
-        <Card className="p-8" style={{ backgroundColor: '#F2EDE9' }}>
-          <div className="text-center space-y-4">
-            <div className="flex items-center justify-center gap-2">
-              <Target className="h-5 w-5 text-primary" />
-              <h3 className="text-lg font-semibold">Revenue at Stake per Booking</h3>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+        >
+          <Card className="p-8" style={{ backgroundColor: '#F2EDE9' }}>
+            <div className="text-center space-y-4">
+              <div className="flex items-center justify-center gap-2">
+                <Target className="h-5 w-5 text-primary" />
+                <h3 className="text-lg font-semibold">Revenue at Stake per Booking</h3>
+              </div>
+              <div className="text-4xl md:text-5xl font-bold font-mono text-primary" data-testid="text-booking-value">
+                {formatCurrency(bookingValue)}
+              </div>
+              <p className="text-sm text-muted-foreground">
+                Every time a Travel Designer waits for content, this revenue is at risk
+              </p>
             </div>
-            <div className="text-4xl md:text-5xl font-bold font-mono text-primary" data-testid="text-booking-value">
-              {formatCurrency(bookingValue)}
-            </div>
-            <p className="text-sm text-muted-foreground">
-              Every time a Travel Designer waits for content, this revenue is at risk
-            </p>
-          </div>
-        </Card>
-      </motion.div>
+          </Card>
+        </motion.div>
+      </div>
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}

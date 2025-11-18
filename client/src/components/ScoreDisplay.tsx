@@ -44,80 +44,115 @@ export default function ScoreDisplay({ score, className }: ScoreDisplayProps) {
 
   return (
     <Card className={`p-10 md:p-12 ${className}`}>
-      <div className="text-center space-y-6">
-        <div className="space-y-2">
-          <h2 className="text-2xl font-semibold">Your Travel Content Health Score</h2>
-          <p className="text-sm text-muted-foreground">
-            It's time to calculate your Travel Content Health Score and see how effective all that expensive content actually is for your property. Score below 50 and you'll know your brand is wasting its content and marketing budget.
-          </p>
-        </div>
-
-        <div className="relative inline-block">
-          <svg className="transform -rotate-90" width="280" height="280">
-            <circle
-              cx="140"
-              cy="140"
-              r="120"
-              stroke="hsl(var(--border))"
-              strokeWidth="16"
-              fill="none"
-            />
-            <motion.circle
-              cx="140"
-              cy="140"
-              r="120"
-              stroke={`hsl(var(--chart-${score >= 81 ? '2' : score >= 61 ? '1' : score >= 41 ? '3' : '5'}))`}
-              strokeWidth="16"
-              fill="none"
-              strokeLinecap="round"
-              strokeDasharray={circumference}
-              strokeDashoffset={strokeDashoffset}
-              initial={{ strokeDashoffset: circumference }}
-              animate={{ strokeDashoffset }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
-            />
-          </svg>
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-              className="text-center"
-            >
-              <div className="text-6xl md:text-7xl font-bold font-mono" data-testid="text-score">
-                {displayScore}
-              </div>
-              <div className="text-xl text-muted-foreground font-medium">/100</div>
-            </motion.div>
+      <div className="flex flex-col lg:flex-row gap-8 items-center">
+        <div className="flex-1 text-center space-y-6">
+          <div className="space-y-2">
+            <h2 className="text-2xl font-semibold">Your Travel Content Health Score</h2>
+            <p className="text-sm text-muted-foreground">
+              It's time to calculate your Travel Content Health Score and see how effective all that expensive content actually is for your property. Score below 50 and you'll know your brand is wasting its content and marketing budget.
+            </p>
           </div>
+
+          <div className="relative inline-block">
+            <svg className="transform -rotate-90" width="280" height="280">
+              <circle
+                cx="140"
+                cy="140"
+                r="120"
+                stroke="hsl(var(--border))"
+                strokeWidth="16"
+                fill="none"
+              />
+              <motion.circle
+                cx="140"
+                cy="140"
+                r="120"
+                stroke={`hsl(var(--chart-${score >= 81 ? '2' : score >= 61 ? '1' : score >= 41 ? '3' : '5'}))`}
+                strokeWidth="16"
+                fill="none"
+                strokeLinecap="round"
+                strokeDasharray={circumference}
+                strokeDashoffset={strokeDashoffset}
+                initial={{ strokeDashoffset: circumference }}
+                animate={{ strokeDashoffset }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+              />
+            </svg>
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                className="text-center"
+              >
+                <div className="text-6xl md:text-7xl font-bold font-mono" data-testid="text-score">
+                  {displayScore}
+                </div>
+                <div className="text-xl text-muted-foreground font-medium">/100</div>
+              </motion.div>
+            </div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1 }}
+            className="flex items-center justify-center gap-2"
+          >
+            <Icon className={`h-5 w-5 ${status.color.replace('bg-', 'text-')}`} />
+            <Badge
+              className={`${status.color} text-white text-base px-4 py-1`}
+              data-testid="badge-status"
+            >
+              {status.label}
+            </Badge>
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2 }}
+            className="text-sm text-muted-foreground max-w-md mx-auto"
+          >
+            {score >= 81 && "Your content management is in excellent health. Keep maintaining these strong practices."}
+            {score >= 61 && score < 81 && "You're doing well, but there's room for optimization to maximize your content ROI."}
+            {score >= 41 && score < 61 && "Your content health needs attention. PIXI can help you improve significantly."}
+            {score < 41 && "Your content management has critical inefficiencies. PIXI offers immediate improvement opportunities."}
+          </motion.p>
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1 }}
-          className="flex items-center justify-center gap-2"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 1.3 }}
+          className="lg:w-72 space-y-4"
         >
-          <Icon className={`h-5 w-5 ${status.color.replace('bg-', 'text-')}`} />
-          <Badge
-            className={`${status.color} text-white text-base px-4 py-1`}
-            data-testid="badge-status"
-          >
-            {status.label}
-          </Badge>
+          <div className="space-y-3 p-6 rounded-lg border bg-muted/30">
+            <h3 className="font-semibold text-sm">Key Assumptions</h3>
+            <div className="space-y-2.5 text-xs text-muted-foreground">
+              <div className="flex items-start gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                <p>Average commercial manager salary: £45,000/year</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                <p>PIXI subscription: £30,000/year</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                <p>Average booking conversion: 15%</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                <p>Content-driven discovery increase: 25%</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                <p>Brand inconsistency cost: 10% of content budget</p>
+              </div>
+            </div>
+          </div>
         </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="text-sm text-muted-foreground max-w-md mx-auto"
-        >
-          {score >= 81 && "Your content management is in excellent health. Keep maintaining these strong practices."}
-          {score >= 61 && score < 81 && "You're doing well, but there's room for optimization to maximize your content ROI."}
-          {score >= 41 && score < 61 && "Your content health needs attention. PIXI can help you improve significantly."}
-          {score < 41 && "Your content management has critical inefficiencies. PIXI offers immediate improvement opportunities."}
-        </motion.p>
       </div>
     </Card>
   );

@@ -128,7 +128,7 @@ export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFo
               <FormItem>
                 <FormLabel className="text-sm font-medium flex items-center gap-2">
                   <Clock className="h-4 w-4 text-muted-foreground" />
-                  How many hours per week ( per property our team wasting on manual asset requests?
+                  How many hours per week (per property) is your team wasting on manual asset requests?
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -140,7 +140,7 @@ export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFo
                   />
                 </FormControl>
                 <FormDescription className="text-xs">
-                  Time spent on manual asset requests weekly
+                  Time spent on manual asset requests weekly per property
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -154,7 +154,7 @@ export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFo
               <FormItem>
                 <FormLabel className="text-sm font-medium flex items-center gap-2">
                   <FileText className="h-4 w-4 text-muted-foreground" />
-                  Estimated annual content creation budget (£)
+                  Estimated annual content creation budget per property (£)
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -171,7 +171,7 @@ export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFo
                   />
                 </FormControl>
                 <FormDescription className="text-xs">
-                  Estimated annual content creation budget
+                  Estimated annual content creation budget per property
                 </FormDescription>
                 <FormMessage />
               </FormItem>
