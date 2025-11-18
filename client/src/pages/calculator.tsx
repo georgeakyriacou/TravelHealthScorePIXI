@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import CalculatorForm, { type CalculatorFormValues } from "@/components/CalculatorForm";
 import ScoreDisplay from "@/components/ScoreDisplay";
 import MetricsBreakdown from "@/components/MetricsBreakdown";
+import SubscriptionRecommendation from "@/components/SubscriptionRecommendation";
 import { calculatePCC } from "@/lib/calculator";
 import type { CalculatorResult } from "@shared/schema";
 import { motion } from "framer-motion";
@@ -10,6 +11,7 @@ import { useIframeResize } from "@/hooks/useIframeResize";
 
 export default function CalculatorPage() {
   const [result, setResult] = useState<CalculatorResult | null>(null);
+  const [formValues, setFormValues] = useState<CalculatorFormValues | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
   
   useIframeResize();
@@ -20,6 +22,7 @@ export default function CalculatorPage() {
     setTimeout(() => {
       const calculatedResult = calculatePCC(values);
       setResult(calculatedResult);
+      setFormValues(values);
       setIsCalculating(false);
       
       setTimeout(() => {
@@ -95,6 +98,13 @@ export default function CalculatorPage() {
                   roiPotential={result.roiPotential}
                 />
               </div>
+
+              {formValues && (
+                <SubscriptionRecommendation
+                  portfolioSize={formValues.portfolioSize}
+                  roomKeys={formValues.roomKeys}
+                />
+              )}
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}

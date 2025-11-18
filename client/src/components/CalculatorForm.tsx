@@ -19,10 +19,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Building2, Coins, Clock, FileText } from "lucide-react";
+import { Building2, Coins, Clock, FileText, Key } from "lucide-react";
 
 const formSchema = z.object({
   portfolioSize: z.string().min(1, "Please select your portfolio size"),
+  roomKeys: z.coerce.number().min(0, "Room keys must be 0 or greater").optional(),
   adr: z.coerce.number().min(1, "ADR must be greater than 0"),
   hoursPerWeek: z.coerce.number().min(0).max(168, "Max 168 hours in a week"),
   annualBudget: z.coerce.number().min(0),
@@ -51,11 +52,14 @@ export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFo
     resolver: zodResolver(formSchema),
     defaultValues: {
       portfolioSize: "single",
+      roomKeys: undefined,
       adr: 1000,
       hoursPerWeek: 5,
       annualBudget: 20000,
     },
   });
+
+  const portfolioSize = form.watch("portfolioSize");
 
   return (
     <Form {...form}>
@@ -89,6 +93,34 @@ export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFo
               </FormItem>
             )}
           />
+
+          {portfolioSize === "single" && (
+            <FormField
+              control={form.control}
+              name="roomKeys"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm font-medium flex items-center gap-2">
+                    <Key className="h-4 w-4 text-muted-foreground" />
+                    Enter number of room keys
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      placeholder="50"
+                      {...field}
+                      data-testid="input-roomkeys"
+                      className="text-lg"
+                    />
+                  </FormControl>
+                  <FormDescription className="text-xs">
+                    Total number of room keys at your property
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
 
           <FormField
             control={form.control}
