@@ -48,8 +48,7 @@ export default function CalculatorPage() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-base text-muted-foreground max-w-2xl mx-auto"
             >
-              Calculate your Travel Content Health Score - a diagnostic measure of your content
-              management efficiency. Discover hidden costs and revenue opportunities with PIXI.
+              Discover your Travel Content Health Score - a diagnostic measure that highlights hidden gaps, missed revenue, and the opportunities PIXI can unlock to elevate your story and drive real ROI.
             </motion.p>
           </div>
 
@@ -62,7 +61,7 @@ export default function CalculatorPage() {
               <div className="space-y-2 mb-6">
                 <h2 className="text-2xl font-semibold">Enter Your Details</h2>
                 <p className="text-sm text-muted-foreground">
-                  Provide your property information for an accurate health score assessment
+                  Share your property information to receive an accurate, tailored assessment of your Travel Content Health Score.
                 </p>
               </div>
               <CalculatorForm onSubmit={handleSubmit} isCalculating={isCalculating} />
@@ -81,7 +80,7 @@ export default function CalculatorPage() {
                 >
                   <h2 className="text-2xl font-semibold">Your Detailed Breakdown</h2>
                   <p className="text-sm text-muted-foreground">
-                    Understanding the financial impact on your business
+                    Understanding the potential impact a poor Travel Content Health score has on your business
                   </p>
                 </motion.div>
                 
@@ -103,8 +102,7 @@ export default function CalculatorPage() {
                   <div className="space-y-4">
                     <h3 className="text-xl font-semibold">Ready to Improve Your Score?</h3>
                     <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-                      PIXI eliminates content friction, maximizes your reach, and protects your brand
-                      consistency. Transform these insights into action.
+                      Your content deserves to be discovered. With PIXI, you elevate your story, expand your audience, and protect the integrity of your brand. Let's bring your content to its full potential.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
                       <button

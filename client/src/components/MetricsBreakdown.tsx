@@ -36,7 +36,7 @@ export default function MetricsBreakdown({
     {
       title: "Productivity Loss",
       value: formatCurrency(laborCostDrain),
-      description: "High-value labor wasted on manual admin tasks",
+      description: "The amount of money your team is wasting on admin from high-value labour.",
       icon: AlertTriangle,
       color: "text-red-500",
       delay: 0.2,
@@ -44,15 +44,15 @@ export default function MetricsBreakdown({
     {
       title: "Discovery Opportunity",
       value: formatCurrency(totalOpportunity),
-      description: "Incremental revenue PIXI can generate through content reach",
+      description: "This is the estimated incremental revenue PIXI can generate by maximising your content reach.",
       icon: TrendingUp,
       color: "text-green-500",
       delay: 0.3,
     },
     {
-      title: "Content Investment at Risk",
+      title: "The Content Investment Index",
       value: formatCurrency(contentAtRisk),
-      description: "Annual exposure from inconsistent branding and slow velocity",
+      description: "The annual estimated cost from inconsistent branding and slow velocity.",
       icon: DollarSign,
       color: "text-amber-500",
       delay: 0.4,
@@ -110,7 +110,7 @@ export default function MetricsBreakdown({
               {formatCurrency(bookingValue)}
             </div>
             <p className="text-sm text-muted-foreground">
-              Every day an advisor waits for content, this revenue is at risk
+              Every time a Travel Designer waits for content, this revenue is at risk
             </p>
           </div>
         </Card>

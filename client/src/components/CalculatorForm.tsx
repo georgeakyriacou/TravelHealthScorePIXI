@@ -68,7 +68,7 @@ export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFo
               <FormItem>
                 <FormLabel className="text-sm font-medium flex items-center gap-2">
                   <Building2 className="h-4 w-4 text-muted-foreground" />
-                  Which best describes your portfolio?
+                  How many properties do you manage?
                 </FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
@@ -97,7 +97,7 @@ export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFo
               <FormItem>
                 <FormLabel className="text-sm font-medium flex items-center gap-2">
                   <Coins className="h-4 w-4 text-muted-foreground" />
-                  Average Daily Rate (£)
+                  What is your Average Daily Rate (ADR)? (£)
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -128,7 +128,7 @@ export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFo
               <FormItem>
                 <FormLabel className="text-sm font-medium flex items-center gap-2">
                   <Clock className="h-4 w-4 text-muted-foreground" />
-                  Hours Wasted Per Week
+                  How many hours per week is your Commercial team wasting on manual asset requests?
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -154,7 +154,7 @@ export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFo
               <FormItem>
                 <FormLabel className="text-sm font-medium flex items-center gap-2">
                   <FileText className="h-4 w-4 text-muted-foreground" />
-                  Annual Content Budget (£)
+                  Estimated annual content creation budget (£)
                 </FormLabel>
                 <FormControl>
                   <Input

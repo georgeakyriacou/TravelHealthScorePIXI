@@ -48,7 +48,7 @@ export default function ScoreDisplay({ score, className }: ScoreDisplayProps) {
         <div className="space-y-2">
           <h2 className="text-2xl font-semibold">Your Travel Content Health Score</h2>
           <p className="text-sm text-muted-foreground">
-            A diagnostic measure of your travel content health
+            It's time to calculate your Travel Content Health Score and see how effective all that expensive content actually is for your property. Score below 50 and you'll know your brand is wasting its content and marketing budget.
           </p>
         </div>
 
