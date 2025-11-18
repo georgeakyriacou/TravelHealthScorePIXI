@@ -50,7 +50,7 @@ export default function CalculatorForm({ onSubmit, isCalculating }: CalculatorFo
   const form = useForm<CalculatorFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      portfolioSize: "small",
+      portfolioSize: "single",
       adr: 1000,
       hoursPerWeek: 5,
       annualBudget: 20000,
