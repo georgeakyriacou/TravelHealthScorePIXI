@@ -148,6 +148,20 @@ export default function ScoreDisplay({ score, className }: ScoreDisplayProps) {
               <div className="flex items-start justify-between gap-2">
                 <div className="flex items-start gap-2 flex-1">
                   <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                  <p>Working days per year: 220</p>
+                </div>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Info className="h-3.5 w-3.5 flex-shrink-0 mt-1 cursor-help" />
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    <p className="text-xs">Standard conservative assumption for luxury hotel staff.</p>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex items-start gap-2 flex-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
                   <p>Annual working hours: 1,760</p>
                 </div>
                 <Tooltip>
@@ -170,20 +184,6 @@ export default function ScoreDisplay({ score, className }: ScoreDisplayProps) {
                   </TooltipTrigger>
                   <TooltipContent className="max-w-xs">
                     <p className="text-xs">Based on the 'Medium' plan subscription cost.</p>
-                  </TooltipContent>
-                </Tooltip>
-              </div>
-              <div className="flex items-start justify-between gap-2">
-                <div className="flex items-start gap-2 flex-1">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                  <p>Working days per year: 220</p>
-                </div>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Info className="h-3.5 w-3.5 flex-shrink-0 mt-1 cursor-help" />
-                  </TooltipTrigger>
-                  <TooltipContent className="max-w-xs">
-                    <p className="text-xs">Standard conservative assumption for luxury hotel staff.</p>
                   </TooltipContent>
                 </Tooltip>
               </div>
