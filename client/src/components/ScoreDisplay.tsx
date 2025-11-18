@@ -141,7 +141,7 @@ export default function ScoreDisplay({ score, className }: ScoreDisplayProps) {
                     <Info className="h-3.5 w-3.5 flex-shrink-0 mt-1 cursor-help" />
                   </TooltipTrigger>
                   <TooltipContent className="max-w-xs">
-                    <p className="text-xs">Average of Sales Dir (£70k) and Marketing Dir (£95k) used in research.</p>
+                    <p className="text-xs">Average of Sales Director (£70k) and Marketing Director (£95k).</p>
                   </TooltipContent>
                 </Tooltip>
               </div>
@@ -169,21 +169,7 @@ export default function ScoreDisplay({ score, className }: ScoreDisplayProps) {
                     <Info className="h-3.5 w-3.5 flex-shrink-0 mt-1 cursor-help" />
                   </TooltipTrigger>
                   <TooltipContent className="max-w-xs">
-                    <p className="text-xs">Working Days Per Year x 8</p>
-                  </TooltipContent>
-                </Tooltip>
-              </div>
-              <div className="flex items-start justify-between gap-2">
-                <div className="flex items-start gap-2 flex-1">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                  <p>PIXI subscription (Medium plan): £5,100/year</p>
-                </div>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Info className="h-3.5 w-3.5 flex-shrink-0 mt-1 cursor-help" />
-                  </TooltipTrigger>
-                  <TooltipContent className="max-w-xs">
-                    <p className="text-xs">Based on the 'Medium' plan subscription cost.</p>
+                    <p className="text-xs">Annual working days per year (standard conservative assumption for luxury hotel staff) x 8 hours per day.</p>
                   </TooltipContent>
                 </Tooltip>
               </div>
@@ -212,6 +198,20 @@ export default function ScoreDisplay({ score, className }: ScoreDisplayProps) {
                   </TooltipTrigger>
                   <TooltipContent className="max-w-xs">
                     <p className="text-xs">Estimate of high-value bookings enabled by PIXI leads/exposure.</p>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex items-start gap-2 flex-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                  <p>PIXI subscription (Medium plan): £5,100/year</p>
+                </div>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Info className="h-3.5 w-3.5 flex-shrink-0 mt-1 cursor-help" />
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    <p className="text-xs">Based on a 'Medium' plan subscription cost with PIXI.</p>
                   </TooltipContent>
                 </Tooltip>
               </div>
