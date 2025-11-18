@@ -6,10 +6,13 @@ import MetricsBreakdown from "@/components/MetricsBreakdown";
 import { calculatePCC } from "@/lib/calculator";
 import type { CalculatorResult } from "@shared/schema";
 import { motion } from "framer-motion";
+import { useIframeResize } from "@/hooks/useIframeResize";
 
 export default function CalculatorPage() {
   const [result, setResult] = useState<CalculatorResult | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
+  
+  useIframeResize();
 
   const handleSubmit = (values: CalculatorFormValues) => {
     setIsCalculating(true);
