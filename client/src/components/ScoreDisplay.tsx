@@ -169,7 +169,7 @@ export default function ScoreDisplay({ score, className }: ScoreDisplayProps) {
                     <Info className="h-3.5 w-3.5 flex-shrink-0 mt-1 cursor-help" />
                   </TooltipTrigger>
                   <TooltipContent className="max-w-xs">
-                    <p className="text-xs">220 working days × 8 hours per day.</p>
+                    <p className="text-xs">Working Days Per Year x 8</p>
                   </TooltipContent>
                 </Tooltip>
               </div>
