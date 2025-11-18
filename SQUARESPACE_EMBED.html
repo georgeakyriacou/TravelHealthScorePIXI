@@ -11,6 +11,7 @@
     id="pixi-calculator-iframe"
     src="YOUR_PUBLISHED_URL_HERE"
     width="100%"
+    tabindex="-1"
     style="border: none; overflow: hidden; min-height: 800px; transition: height 0.3s ease; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);"
     scrolling="no"
     title="PIXI Travel Content Health Score Calculator"
@@ -19,11 +20,12 @@
 
 <script>
 (function() {
+  var iframe = document.getElementById('pixi-calculator-iframe');
+  
   // Auto-resize iframe based on content height
   window.addEventListener('message', function(event) {
     // Listen for height updates from the calculator
     if (event.data && event.data.type === 'iframe-resize') {
-      var iframe = document.getElementById('pixi-calculator-iframe');
       if (iframe && event.data.height) {
         // Update iframe height with smooth transition
         iframe.style.height = event.data.height + 'px';
@@ -31,9 +33,14 @@
     }
   }, false);
   
-  // Set initial height after iframe loads
-  var iframe = document.getElementById('pixi-calculator-iframe');
+  // Prevent iframe from showing focus outline
   if (iframe) {
+    // Remove focus when iframe gets focused
+    iframe.addEventListener('focus', function() {
+      this.blur();
+    });
+    
+    // Set initial height after iframe loads
     iframe.onload = function() {
       // Give it a moment for the content to render
       setTimeout(function() {
@@ -41,6 +48,13 @@
       }, 500);
     };
   }
+  
+  // Additional measure: blur iframe on any click inside it
+  document.addEventListener('click', function() {
+    if (iframe && document.activeElement === iframe) {
+      iframe.blur();
+    }
+  });
 })();
 </script>
 
@@ -54,11 +68,13 @@
   outline: none !important;
 }
 
-/* Remove focus outline from iframe */
+/* Force remove all focus states */
 #pixi-calculator-iframe:focus,
-#pixi-calculator-iframe:focus-visible {
+#pixi-calculator-iframe:focus-visible,
+#pixi-calculator-iframe:active {
   outline: none !important;
-  border: none;
+  border: none !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
 }
 
 /* Responsive adjustments */
