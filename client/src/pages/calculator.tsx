@@ -105,20 +105,24 @@ export default function CalculatorPage() {
                       Your content deserves to be discovered. With PIXI, you elevate your story, expand your audience, and protect the integrity of your brand. Let's bring your content to its full potential.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
-                      <button
-                        onClick={() => console.log('Schedule demo clicked')}
+                      <a
+                        href="https://www.pixigroup.ai/book-a-demo?utm_source=PIXI+website+&utm_medium=website+&utm_campaign=roi_calculator&utm_id=roi"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="px-6 py-3 bg-primary text-primary-foreground rounded-md font-medium hover-elevate active-elevate-2"
                         data-testid="button-demo"
                       >
                         Schedule a Demo
-                      </button>
-                      <button
-                        onClick={() => console.log('Learn more clicked')}
+                      </a>
+                      <a
+                        href="https://www.pixigroup.ai/pricing-plan?utm_source=PIXI+website+&utm_medium=website+&utm_campaign=roi_calculator&utm_id=roi"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="px-6 py-3 border border-border rounded-md font-medium hover-elevate active-elevate-2"
                         data-testid="button-learn"
                       >
                         Learn More
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </Card>
