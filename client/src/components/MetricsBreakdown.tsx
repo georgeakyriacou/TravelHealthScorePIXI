@@ -43,10 +43,10 @@ export default function MetricsBreakdown({
           <Card className="p-8" style={{ backgroundColor: '#F2EDE9' }}>
             <div className="text-center space-y-4">
               <div className="flex items-center justify-center gap-2">
-                <AlertTriangle className="h-5 w-5 text-red-500" />
+                <AlertTriangle className="h-5 w-5 text-primary" />
                 <h3 className="text-lg font-semibold">Productivity Loss</h3>
               </div>
-              <div className="text-4xl md:text-5xl font-bold font-mono text-red-500" data-testid="text-metric-0">
+              <div className="text-4xl md:text-5xl font-bold font-mono text-primary" data-testid="text-metric-0">
                 {formatCurrency(laborCostDrain)}
               </div>
               <p className="text-sm text-muted-foreground">

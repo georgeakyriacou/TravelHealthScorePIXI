@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { CheckCircle2, AlertCircle, AlertTriangle, XCircle } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { CheckCircle2, AlertCircle, AlertTriangle, XCircle, Info } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -130,29 +131,103 @@ export default function ScoreDisplay({ score, className }: ScoreDisplayProps) {
           <div className="space-y-3 p-6 rounded-lg border bg-muted/30">
             <h3 className="font-semibold text-sm">Key Assumptions</h3>
             <div className="space-y-2.5 text-xs text-muted-foreground">
-              <div className="flex items-start gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                <p>Average S&M Director salary: £82,500/year</p>
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex items-start gap-2 flex-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                  <p>Average Sales & Marketing Director salary: £82,500/year</p>
+                </div>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Info className="h-3.5 w-3.5 flex-shrink-0 mt-1 cursor-help" />
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    <p className="text-xs">Average of Sales Dir (£70k) and Marketing Dir (£95k) used in research.</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
-              <div className="flex items-start gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                <p>PIXI subscription (Medium plan): £5,100/year</p>
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex items-start gap-2 flex-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                  <p>Annual working hours: 1,760</p>
+                </div>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Info className="h-3.5 w-3.5 flex-shrink-0 mt-1 cursor-help" />
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    <p className="text-xs">220 working days × 8 hours per day.</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
-              <div className="flex items-start gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                <p>Working days per year: 220</p>
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex items-start gap-2 flex-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                  <p>PIXI subscription (Medium plan): £5,100/year</p>
+                </div>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Info className="h-3.5 w-3.5 flex-shrink-0 mt-1 cursor-help" />
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    <p className="text-xs">Based on the 'Medium' plan subscription cost.</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
-              <div className="flex items-start gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                <p>Average length of stay: 5 days</p>
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex items-start gap-2 flex-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                  <p>Working days per year: 220</p>
+                </div>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Info className="h-3.5 w-3.5 flex-shrink-0 mt-1 cursor-help" />
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    <p className="text-xs">Standard conservative assumption for luxury hotel staff.</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
-              <div className="flex items-start gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                <p>Conservative risk factor: 10% of content budget</p>
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex items-start gap-2 flex-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                  <p>Average length of stay: 5 days</p>
+                </div>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Info className="h-3.5 w-3.5 flex-shrink-0 mt-1 cursor-help" />
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    <p className="text-xs">Used with ADR to calculate booking value.</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
-              <div className="flex items-start gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                <p>Target incremental bookings: 20 per property</p>
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex items-start gap-2 flex-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                  <p>Conservative risk factor: 10% of content budget</p>
+                </div>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Info className="h-3.5 w-3.5 flex-shrink-0 mt-1 cursor-help" />
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    <p className="text-xs">Conservative baseline for annual revenue loss used in the Consistency Index.</p>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex items-start gap-2 flex-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                  <p>Target incremental bookings: 20 per property</p>
+                </div>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Info className="h-3.5 w-3.5 flex-shrink-0 mt-1 cursor-help" />
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    <p className="text-xs">Estimate of high-value bookings enabled by PIXI leads/exposure.</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
             </div>
           </div>
