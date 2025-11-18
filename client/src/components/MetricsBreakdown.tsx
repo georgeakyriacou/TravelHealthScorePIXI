@@ -24,6 +24,11 @@ function formatPercent(value: number): string {
   return `${Math.ceil(value).toLocaleString('en-GB')}%`;
 }
 
+function formatRatio(percentage: number): string {
+  const ratio = percentage / 100;
+  return `${Math.ceil(ratio).toLocaleString('en-GB')}:1`;
+}
+
 export default function MetricsBreakdown({
   laborCostDrain,
   totalOpportunity,
@@ -32,8 +37,6 @@ export default function MetricsBreakdown({
   roiPotential,
   className,
 }: MetricsBreakdownProps) {
-  const totalGain = laborCostDrain + totalOpportunity + contentAtRisk;
-  
   return (
     <div className={`space-y-6 ${className}`}>
       <div className="grid md:grid-cols-2 gap-6">
@@ -87,12 +90,12 @@ export default function MetricsBreakdown({
       >
         <Card className="p-8 bg-gradient-to-r from-primary/10 to-primary/5 border-primary/20">
           <div className="text-center space-y-3">
-            <h3 className="text-xl font-semibold">Total Annual Value with PIXI</h3>
+            <h3 className="text-xl font-semibold">Total ROI Potential</h3>
             <div className="text-5xl md:text-6xl font-bold text-primary font-mono" data-testid="text-roi">
-              {formatCurrency(totalGain)}
+              {formatRatio(roiPotential)}
             </div>
             <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-              Combined savings from productivity gains, revenue opportunities, and risk mitigation that PIXI delivers annually
+              For every £1 invested in PIXI, you gain this much in combined productivity savings, revenue opportunities, and risk mitigation
             </p>
           </div>
         </Card>
