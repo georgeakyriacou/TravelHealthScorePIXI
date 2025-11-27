@@ -1,20 +1,53 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import CalculatorForm, { type CalculatorFormValues } from "@/components/CalculatorForm";
 import ScoreDisplay from "@/components/ScoreDisplay";
 import MetricsBreakdown from "@/components/MetricsBreakdown";
 import SubscriptionRecommendation from "@/components/SubscriptionRecommendation";
+import ResultsPDFDocument from "@/components/ResultsPDFDocument";
 import { calculatePCC } from "@/lib/calculator";
 import type { CalculatorResult } from "@shared/schema";
 import { motion } from "framer-motion";
 import { useIframeResize } from "@/hooks/useIframeResize";
+import { pdf } from "@react-pdf/renderer";
+import { Download } from "lucide-react";
 
 export default function CalculatorPage() {
   const [result, setResult] = useState<CalculatorResult | null>(null);
   const [formValues, setFormValues] = useState<CalculatorFormValues | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
   
   useIframeResize();
+
+  const handleExportPDF = async () => {
+    if (!result || !formValues) return;
+    
+    setIsExporting(true);
+    try {
+      const blob = await pdf(
+        <ResultsPDFDocument
+          result={result}
+          portfolioSize={formValues.portfolioSize}
+          roomKeys={formValues.roomKeys || 50}
+        />
+      ).toBlob();
+      
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `travel-content-health-report-${new Date().toISOString().split("T")[0]}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+    } finally {
+      setIsExporting(false);
+    }
+  };
 
   const handleSubmit = (values: CalculatorFormValues) => {
     setIsCalculating(true);
@@ -74,8 +107,20 @@ export default function CalculatorPage() {
             </Card>
           </motion.div>
 
-          {result && (
+          {result && formValues && (
             <div id="results" className="space-y-8 scroll-mt-8">
+              <div className="flex justify-end">
+                <Button
+                  onClick={handleExportPDF}
+                  disabled={isExporting}
+                  variant="outline"
+                  className="gap-2"
+                  data-testid="button-export-pdf"
+                >
+                  <Download className="h-4 w-4" />
+                  {isExporting ? "Generating PDF..." : "Export Results"}
+                </Button>
+              </div>
               <ScoreDisplay score={result.pccScore} pixiCost={result.pixiCost} />
               
               <div className="space-y-4">
@@ -99,12 +144,10 @@ export default function CalculatorPage() {
                 />
               </div>
 
-              {formValues && (
-                <SubscriptionRecommendation
-                  portfolioSize={formValues.portfolioSize}
-                  roomKeys={formValues.roomKeys}
-                />
-              )}
+              <SubscriptionRecommendation
+                portfolioSize={formValues.portfolioSize}
+                roomKeys={formValues.roomKeys}
+              />
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
