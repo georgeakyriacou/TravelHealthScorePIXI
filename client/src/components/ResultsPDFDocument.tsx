@@ -3,9 +3,11 @@ import {
   Page,
   Text,
   View,
+  Image,
   StyleSheet,
 } from "@react-pdf/renderer";
 import type { CalculatorResult } from "@shared/schema";
+import pixiLogo from "@assets/PIXI Logos_PIXI Logo Colour_1764243448135.png";
 
 const primaryColor = "#E91E8C";
 const mutedColor = "#666666";
@@ -16,6 +18,15 @@ const styles = StyleSheet.create({
     padding: 40,
     fontFamily: "Helvetica",
     backgroundColor: "#FFFFFF",
+  },
+  logoContainer: {
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  logo: {
+    width: 120,
+    height: 40,
+    objectFit: "contain",
   },
   header: {
     marginBottom: 24,
@@ -220,10 +231,14 @@ export default function ResultsPDFDocument({
   return (
     <Document>
       <Page size="A4" style={styles.page}>
+        <View style={styles.logoContainer}>
+          <Image style={styles.logo} src={pixiLogo} />
+        </View>
+
         <View style={styles.header}>
           <Text style={styles.title}>Travel Content Health Report</Text>
           <Text style={styles.subtitle}>
-            Powered by PIXI Group | Generated on {new Date().toLocaleDateString("en-GB")}
+            Generated on {new Date().toLocaleDateString("en-GB")}
           </Text>
         </View>
 
