@@ -237,18 +237,6 @@ export default function ResultsPDFDocument({
           </View>
         </View>
 
-        {tierInfo && (
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Recommended PIXI Subscription</Text>
-            <View style={styles.recommendationCard}>
-              <Text style={styles.recommendationTitle}>Based on Your Profile</Text>
-              <Text style={styles.tierName}>{tierInfo.name}</Text>
-              <Text style={styles.tierPrice}>{tierInfo.price}</Text>
-              <Text style={styles.tierDescription}>{tierInfo.description}</Text>
-            </View>
-          </View>
-        )}
-
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Your Detailed Breakdown</Text>
           <View style={styles.metricsGrid}>
@@ -274,6 +262,18 @@ export default function ResultsPDFDocument({
             </Text>
           </View>
         </View>
+
+        {tierInfo && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Recommended PIXI Subscription</Text>
+            <View style={styles.recommendationCard}>
+              <Text style={styles.recommendationTitle}>Based on Your Profile</Text>
+              <Text style={styles.tierName}>{tierInfo.name}</Text>
+              <Text style={styles.tierPrice}>{tierInfo.price}</Text>
+              <Text style={styles.tierDescription}>{tierInfo.description}</Text>
+            </View>
+          </View>
+        )}
 
         <View style={styles.footer}>
           <Text style={styles.footerText}>
