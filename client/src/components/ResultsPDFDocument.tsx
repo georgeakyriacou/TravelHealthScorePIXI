@@ -125,6 +125,12 @@ const styles = StyleSheet.create({
     color: primaryColor,
     textAlign: "center",
   },
+  metricDescription: {
+    fontSize: 8,
+    color: mutedColor,
+    textAlign: "center",
+    marginTop: 6,
+  },
   roiCard: {
     padding: 18,
     backgroundColor: primaryColor,
@@ -260,11 +266,17 @@ export default function ResultsPDFDocument({
               <Text style={styles.metricValue}>
                 {formatCurrency(result.laborCostDrain)}
               </Text>
+              <Text style={styles.metricDescription}>
+                The amount of money your team wastes on high-value staff manually sending links and files
+              </Text>
             </View>
             <View style={styles.metricCard}>
               <Text style={styles.metricLabel}>Revenue at Stake per Booking</Text>
               <Text style={styles.metricValue}>
                 {formatCurrency(result.bookingValue)}
+              </Text>
+              <Text style={styles.metricDescription}>
+                Revenue value of each booking based on your ADR and average length of stay
               </Text>
             </View>
           </View>
