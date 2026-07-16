@@ -105,7 +105,7 @@ export default function SubscriptionRecommendation({
                 asChild
               >
                 <a
-                  href="https://www.pixigroup.ai/pricing-plan?utm_source=calculator&utm_medium=referral&utm_campaign=health_score&plan=basic"
+                  href="https://www.pixigroup.ai/pricing?utm_source=calculator&utm_medium=referral&utm_campaign=health_score&plan=basic"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -145,7 +145,7 @@ export default function SubscriptionRecommendation({
                 asChild
               >
                 <a
-                  href="https://www.pixigroup.ai/pricing-plan?utm_source=calculator&utm_medium=referral&utm_campaign=health_score&plan=pro"
+                  href="https://www.pixigroup.ai/pricing?utm_source=calculator&utm_medium=referral&utm_campaign=health_score&plan=pro"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

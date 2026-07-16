@@ -162,7 +162,7 @@ export default function CalculatorPage() {
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                       <a
-                        href="https://www.pixigroup.ai/book-a-demo?utm_source=PIXI+website+&utm_medium=website+&utm_campaign=roi_calculator&utm_id=roi"
+                        href="https://www.pixigroup.ai/contact/sales?utm_source=PIXI+website+&utm_medium=website+&utm_campaign=roi_calculator&utm_id=roi"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-8 py-4 bg-primary text-primary-foreground rounded-md font-semibold text-lg hover-elevate active-elevate-2 outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
@@ -171,7 +171,7 @@ export default function CalculatorPage() {
                         Schedule a Demo
                       </a>
                       <a
-                        href="https://www.pixigroup.ai/pricing-plan?utm_source=PIXI+website+&utm_medium=website+&utm_campaign=roi_calculator&utm_id=roi"
+                        href="https://www.pixigroup.ai/pricing?utm_source=PIXI+website+&utm_medium=website+&utm_campaign=roi_calculator&utm_id=roi"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-8 py-4 border-2 border-primary bg-background text-primary rounded-md font-semibold text-lg hover-elevate active-elevate-2 outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
