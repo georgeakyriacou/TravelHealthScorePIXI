@@ -11,12 +11,39 @@ const CONSTANTS = {
   MAX_OPPORTUNITY_BENCHMARK: 500000,
 };
 
-const PIXI_PRICING = {
-  SMALL: 2040,
-  MEDIUM: 5100,
-  LARGE: 7140,
-  ENTERPRISE: 5100,
-};
+const BASIC_BRACKETS = [
+  { from: 1, to: 3, rate: 99 },
+  { from: 4, to: 15, rate: 79 },
+  { from: 16, to: 30, rate: 69 },
+  { from: 31, to: 50, rate: 59 },
+  { from: 51, to: Infinity, rate: 49 },
+];
+
+const PRO_BRACKETS = [
+  { from: 1, to: 3, rate: 299 },
+  { from: 4, to: 15, rate: 238.6 },
+  { from: 16, to: 30, rate: 208.39 },
+  { from: 31, to: 50, rate: 178.19 },
+  { from: 51, to: Infinity, rate: 148.99 },
+];
+
+function calculateGraduatedMonthlyTotal(hotels: number, brackets: typeof BASIC_BRACKETS): number {
+  let total = 0;
+  for (const bracket of brackets) {
+    if (hotels < bracket.from) break;
+    const cap = bracket.to === Infinity ? hotels : Math.min(hotels, bracket.to);
+    total += (cap - bracket.from + 1) * bracket.rate;
+  }
+  return total;
+}
+
+export function calculateBasicAnnualCost(hotels: number): number {
+  return calculateGraduatedMonthlyTotal(hotels, BASIC_BRACKETS) * 12;
+}
+
+export function calculateProAnnualCost(hotels: number): number {
+  return calculateGraduatedMonthlyTotal(hotels, PRO_BRACKETS) * 12;
+}
 
 function getPropertyCount(portfolioSize: string): number {
   switch (portfolioSize) {
@@ -31,51 +58,33 @@ function getPropertyCount(portfolioSize: string): number {
   }
 }
 
-function getPixiCost(portfolioSize: string, roomKeys?: number): number {
-  if (portfolioSize === "small" || portfolioSize === "large") {
-    return PIXI_PRICING.ENTERPRISE;
-  }
-  
-  if (portfolioSize === "single" && roomKeys !== undefined && roomKeys !== null) {
-    if (roomKeys <= 25) {
-      return PIXI_PRICING.SMALL;
-    } else if (roomKeys <= 80) {
-      return PIXI_PRICING.MEDIUM;
-    } else {
-      return PIXI_PRICING.LARGE;
-    }
-  }
-  
-  return PIXI_PRICING.MEDIUM;
-}
-
 export function calculatePCC(input: CalculatorFormValues): CalculatorResult {
   const properties = getPropertyCount(input.portfolioSize);
-  
+
   const avgHourlyRate = CONSTANTS.AVG_SM_ANNUAL_SALARY / CONSTANTS.ANNUAL_WORKING_HOURS;
-  
+
   const annualWastedHours = input.hoursPerWeek * 52;
-  
+
   const laborCostDrain = avgHourlyRate * annualWastedHours;
-  
+
   const totalContentBudget = input.annualBudget * properties;
-  
+
   const contentAtRisk = totalContentBudget * CONSTANTS.CONSERVATIVE_RISK_FACTOR;
-  
+
   const bookingValue = input.adr * CONSTANTS.AVERAGE_LENGTH_OF_STAY;
-  
+
   const totalOpportunity = bookingValue * CONSTANTS.INCREMENTAL_BOOKINGS_PER_PROPERTY * properties;
-  
+
   const maxLaborCost = 50000;
   const productivityScore = Math.max(0, 30 * (1 - laborCostDrain / maxLaborCost));
-  
+
   const consistencyIndex = Math.max(0, 35 * (1 - contentAtRisk / (totalContentBudget * 0.23)));
-  
+
   const discoveryValueScore = Math.min(35, 35 * (totalOpportunity / CONSTANTS.MAX_OPPORTUNITY_BENCHMARK));
-  
+
   const pccScore = Math.round(productivityScore + consistencyIndex + discoveryValueScore);
-  
-  const pixiCost = getPixiCost(input.portfolioSize, input.roomKeys);
+
+  const pixiCost = calculateBasicAnnualCost(properties);
   const totalGain = laborCostDrain + totalOpportunity + contentAtRisk;
   const roiPotential = (totalGain / pixiCost) * 100;
 

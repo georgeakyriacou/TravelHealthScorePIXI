@@ -2,45 +2,62 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
-import { Sparkles, ExternalLink } from "lucide-react";
+import { Sparkles, ExternalLink, Check } from "lucide-react";
+import { calculateBasicAnnualCost, calculateProAnnualCost } from "@/lib/calculator";
 
 interface SubscriptionRecommendationProps {
   portfolioSize: string;
   roomKeys?: number;
 }
 
-function getTierFromRoomKeys(roomKeys: number): {
-  name: string;
-  description: string;
-  price: string;
-} {
-  if (roomKeys <= 25) {
-    return {
-      name: "Small",
-      description: "Starter package for smaller hotels looking to improve their content strategy.",
-      price: "£2,040/year",
-    };
-  } else if (roomKeys <= 80) {
-    return {
-      name: "Medium",
-      description: "Designed for hotels with growing content libraries, looking to power up their distribution.",
-      price: "£5,100/year",
-    };
-  } else {
-    return {
-      name: "Large",
-      description: "Perfect for larger hotels with established content libraries and a strong social presence.",
-      price: "£7,140/year",
-    };
+function getPropertyCount(portfolioSize: string): number {
+  switch (portfolioSize) {
+    case "single":
+      return 1;
+    case "small":
+      return 3;
+    case "large":
+      return 8;
+    default:
+      return 1;
   }
 }
 
+function formatPrice(annual: number): string {
+  const monthly = Math.round(annual / 12);
+  return `£${monthly.toLocaleString("en-GB")}/mo`;
+}
+
+function formatAnnual(annual: number): string {
+  return `£${Math.round(annual).toLocaleString("en-GB")}/yr`;
+}
+
+const BASIC_FEATURES = [
+  "Digital Asset Management",
+  "Showcases — shareable live galleries",
+  "Listed on the travel advisor network",
+  "Search & sort media library",
+  "Share links with expiry dates",
+  "2GB included storage",
+  "Limited analytics",
+];
+
+const PRO_FEATURES = [
+  "Everything in Basic",
+  "Distribution to elite travel advisor network",
+  "Personalised branded showcases",
+  "Advanced analytics & reporting",
+  "Featured exposure on the network",
+  "Intelligent search visibility",
+  "100GB included storage",
+];
+
 export default function SubscriptionRecommendation({
   portfolioSize,
-  roomKeys,
 }: SubscriptionRecommendationProps) {
-  const isEnterprise = portfolioSize === "small" || portfolioSize === "large";
-  const tier = !isEnterprise && roomKeys !== undefined && roomKeys !== null ? getTierFromRoomKeys(roomKeys) : null;
+  const hotels = getPropertyCount(portfolioSize);
+  const basicAnnual = calculateBasicAnnualCost(hotels);
+  const proAnnual = calculateProAnnualCost(hotels);
 
   return (
     <motion.div
@@ -55,72 +72,93 @@ export default function SubscriptionRecommendation({
               <Sparkles className="h-5 w-5 text-primary" />
             </div>
             <h3 className="text-xl font-semibold">Your Recommended PIXI Subscription</h3>
+            <p className="text-sm text-muted-foreground">
+              Pricing for {hotels} {hotels === 1 ? "hotel" : "hotels"} — annual billing
+            </p>
           </div>
 
-          {isEnterprise ? (
-            <div className="space-y-4">
-              <div className="text-center py-8 space-y-4">
-                <div className="text-lg font-semibold text-primary">
-                  Enterprise Level
-                </div>
-                <p className="text-muted-foreground max-w-md mx-auto">
-                  Please book a bespoke demo with our Sales team
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="border rounded-md p-6 space-y-4 flex flex-col">
+              <div className="space-y-1">
+                <Badge variant="secondary" className="mb-2">Basic</Badge>
+                <p className="text-2xl font-bold" data-testid="text-basic-price">
+                  {formatPrice(basicAnnual)}
                 </p>
-                <div className="pt-4">
-                  <Button
-                    className="gap-2"
-                    data-testid="button-book-demo"
-                    asChild
-                  >
-                    <a
-                      href="https://www.pixigroup.ai/enterprise?utm_source=calculator&utm_medium=referral&utm_campaign=health_score"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Book a Demo
-                      <ExternalLink className="h-4 w-4" />
-                    </a>
-                  </Button>
-                </div>
-              </div>
-            </div>
-          ) : tier ? (
-            <div className="space-y-6 text-center">
-              <div className="space-y-3">
-                <div className="text-lg font-semibold text-primary" data-testid="text-tier-name">
-                  {tier.name} Plan
-                </div>
-                <p className="text-sm text-muted-foreground max-w-2xl mx-auto">{tier.description}</p>
-                <div className="pt-2">
-                  <p className="text-2xl font-bold" data-testid="text-tier-price">
-                    {tier.price}
-                  </p>
-                  <p className="text-xs text-muted-foreground">15% off annual billing</p>
-                </div>
+                <p className="text-sm text-muted-foreground">
+                  {formatAnnual(basicAnnual)} billed annually
+                </p>
               </div>
 
-              <div>
-                <Button
-                  className="gap-2"
-                  data-testid="button-start-trial"
-                  asChild
+              <ul className="space-y-2 flex-1">
+                {BASIC_FEATURES.map((feature) => (
+                  <li key={feature} className="flex items-start gap-2 text-sm">
+                    <Check className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <Button
+                variant="outline"
+                className="w-full gap-2"
+                data-testid="button-basic-trial"
+                asChild
+              >
+                <a
+                  href="https://www.pixigroup.ai/pricing-plan?utm_source=calculator&utm_medium=referral&utm_campaign=health_score&plan=basic"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <a
-                    href={`https://www.pixigroup.ai/pricing-plan?utm_source=calculator&utm_medium=referral&utm_campaign=health_score&plan=${tier.name.toLowerCase()}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Start Free 14-Day Trial
-                    <ExternalLink className="h-4 w-4" />
-                  </a>
-                </Button>
+                  Start Free 14-Day Trial
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+              </Button>
+            </div>
+
+            <div className="border-2 border-primary rounded-md p-6 space-y-4 flex flex-col relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                <Badge className="bg-primary text-primary-foreground px-3">Recommended</Badge>
               </div>
+
+              <div className="space-y-1">
+                <Badge variant="default" className="mb-2">Pro</Badge>
+                <p className="text-2xl font-bold" data-testid="text-pro-price">
+                  {formatPrice(proAnnual)}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {formatAnnual(proAnnual)} billed annually
+                </p>
+              </div>
+
+              <ul className="space-y-2 flex-1">
+                {PRO_FEATURES.map((feature) => (
+                  <li key={feature} className="flex items-start gap-2 text-sm">
+                    <Check className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <Button
+                className="w-full gap-2"
+                data-testid="button-pro-trial"
+                asChild
+              >
+                <a
+                  href="https://www.pixigroup.ai/pricing-plan?utm_source=calculator&utm_medium=referral&utm_campaign=health_score&plan=pro"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Start Free 14-Day Trial
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+              </Button>
             </div>
-          ) : (
-            <div className="text-center py-8 text-muted-foreground">
-              <p>Please enter your room keys to see a personalized subscription recommendation.</p>
-            </div>
-          )}
+          </div>
+
+          <p className="text-xs text-muted-foreground text-center">
+            Pay monthly available at +15%. All plans include a free 14-day trial with no card required.
+          </p>
         </div>
       </Card>
     </motion.div>

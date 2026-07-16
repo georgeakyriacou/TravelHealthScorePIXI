@@ -8,6 +8,7 @@ import {
 } from "@react-pdf/renderer";
 import type { CalculatorResult } from "@shared/schema";
 import pixiLogo from "@assets/PIXI Logos_PIXI Logo Colour_1764243448135.png";
+import { calculateBasicAnnualCost, calculateProAnnualCost } from "@/lib/calculator";
 
 const primaryColor = "#E91E8C";
 const mutedColor = "#666666";
@@ -70,36 +71,78 @@ const styles = StyleSheet.create({
     color: mutedColor,
     marginTop: 4,
   },
-  recommendationCard: {
-    padding: 16,
+  plansRow: {
+    flexDirection: "row",
+    gap: 10,
+  },
+  planCard: {
+    flex: 1,
+    padding: 14,
+    borderWidth: 1,
+    borderColor: "#DDDDDD",
+    borderRadius: 8,
+  },
+  planCardPro: {
+    flex: 1,
+    padding: 14,
     borderWidth: 2,
     borderColor: primaryColor,
     borderRadius: 8,
-    alignItems: "center",
   },
-  recommendationTitle: {
-    fontSize: 11,
+  planBadge: {
+    fontSize: 8,
+    fontWeight: "bold",
+    color: mutedColor,
+    marginBottom: 4,
+    textTransform: "uppercase",
+  },
+  planBadgePro: {
+    fontSize: 8,
     fontWeight: "bold",
     color: primaryColor,
-    marginBottom: 6,
+    marginBottom: 4,
+    textTransform: "uppercase",
   },
-  tierName: {
-    fontSize: 18,
+  planPrice: {
+    fontSize: 16,
     fontWeight: "bold",
     color: "#333333",
-    marginBottom: 4,
+    marginBottom: 2,
   },
-  tierPrice: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: primaryColor,
-    marginBottom: 4,
-  },
-  tierDescription: {
+  planPriceAnnual: {
     fontSize: 9,
     color: mutedColor,
-    textAlign: "center",
-    maxWidth: 280,
+    marginBottom: 8,
+  },
+  planFeature: {
+    fontSize: 8,
+    color: "#444444",
+    marginBottom: 3,
+  },
+  planCta: {
+    marginTop: 8,
+    padding: 6,
+    backgroundColor: primaryColor,
+    borderRadius: 4,
+    alignItems: "center",
+  },
+  planCtaOutline: {
+    marginTop: 8,
+    padding: 6,
+    borderWidth: 1,
+    borderColor: "#AAAAAA",
+    borderRadius: 4,
+    alignItems: "center",
+  },
+  planCtaText: {
+    fontSize: 8,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+  },
+  planCtaTextOutline: {
+    fontSize: 8,
+    fontWeight: "bold",
+    color: "#555555",
   },
   metricsGrid: {
     flexDirection: "row",
@@ -190,33 +233,12 @@ function getScoreStatus(score: number): string {
   return "Poor";
 }
 
-function getTierInfo(roomKeys: number, isEnterprise: boolean): { name: string; price: string; description: string } | null {
-  if (isEnterprise) {
-    return {
-      name: "Enterprise",
-      price: "Custom Pricing",
-      description: "Bespoke solution for property groups. Contact our Sales team for a tailored demo.",
-    };
-  }
-  
-  if (roomKeys <= 25) {
-    return {
-      name: "Small Plan",
-      price: "£2,040/year",
-      description: "Starter package for smaller hotels looking to improve their content strategy.",
-    };
-  } else if (roomKeys <= 80) {
-    return {
-      name: "Medium Plan",
-      price: "£5,100/year",
-      description: "Designed for hotels with growing content libraries, looking to power up their distribution.",
-    };
-  } else {
-    return {
-      name: "Large Plan",
-      price: "£7,140/year",
-      description: "Perfect for larger hotels with established content libraries and a strong social presence.",
-    };
+function getPropertyCount(portfolioSize: string): number {
+  switch (portfolioSize) {
+    case "single": return 1;
+    case "small": return 3;
+    case "large": return 8;
+    default: return 1;
   }
 }
 
@@ -229,10 +251,30 @@ interface ResultsPDFDocumentProps {
 export default function ResultsPDFDocument({
   result,
   portfolioSize,
-  roomKeys,
 }: ResultsPDFDocumentProps) {
-  const isEnterprise = portfolioSize === "small" || portfolioSize === "large";
-  const tierInfo = getTierInfo(roomKeys, isEnterprise);
+  const hotels = getPropertyCount(portfolioSize);
+  const basicAnnual = calculateBasicAnnualCost(hotels);
+  const proAnnual = calculateProAnnualCost(hotels);
+  const basicMonthly = Math.round(basicAnnual / 12);
+  const proMonthly = Math.round(proAnnual / 12);
+
+  const BASIC_FEATURES = [
+    "Digital Asset Management",
+    "Showcases — shareable galleries",
+    "Listed on travel advisor network",
+    "Share links with expiry dates",
+    "2GB included storage",
+    "Limited analytics",
+  ];
+
+  const PRO_FEATURES = [
+    "Everything in Basic",
+    "Elite travel advisor distribution",
+    "Personalised branded showcases",
+    "Advanced analytics & reporting",
+    "Featured exposure on the network",
+    "100GB included storage",
+  ];
 
   return (
     <Document>
@@ -290,17 +332,34 @@ export default function ResultsPDFDocument({
           </View>
         </View>
 
-        {tierInfo && (
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Recommended PIXI Subscription</Text>
-            <View style={styles.recommendationCard}>
-              <Text style={styles.recommendationTitle}>Based on Your Profile</Text>
-              <Text style={styles.tierName}>{tierInfo.name}</Text>
-              <Text style={styles.tierPrice}>{tierInfo.price}</Text>
-              <Text style={styles.tierDescription}>{tierInfo.description}</Text>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Recommended PIXI Subscription ({hotels} {hotels === 1 ? "hotel" : "hotels"}, annual billing)</Text>
+          <View style={styles.plansRow}>
+            <View style={styles.planCard}>
+              <Text style={styles.planBadge}>Basic</Text>
+              <Text style={styles.planPrice}>£{basicMonthly.toLocaleString("en-GB")}/mo</Text>
+              <Text style={styles.planPriceAnnual}>{formatCurrency(basicAnnual)}/yr billed annually</Text>
+              {BASIC_FEATURES.map((f) => (
+                <Text key={f} style={styles.planFeature}>• {f}</Text>
+              ))}
+              <View style={styles.planCtaOutline}>
+                <Text style={styles.planCtaTextOutline}>Start Free 14-Day Trial</Text>
+              </View>
+            </View>
+
+            <View style={styles.planCardPro}>
+              <Text style={styles.planBadgePro}>Pro — Recommended</Text>
+              <Text style={styles.planPrice}>£{proMonthly.toLocaleString("en-GB")}/mo</Text>
+              <Text style={styles.planPriceAnnual}>{formatCurrency(proAnnual)}/yr billed annually</Text>
+              {PRO_FEATURES.map((f) => (
+                <Text key={f} style={styles.planFeature}>• {f}</Text>
+              ))}
+              <View style={styles.planCta}>
+                <Text style={styles.planCtaText}>Start Free 14-Day Trial</Text>
+              </View>
             </View>
           </View>
-        )}
+        </View>
 
         <View style={styles.footer}>
           <Text style={styles.footerText}>
