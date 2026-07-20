@@ -18,12 +18,12 @@ export default function CalculatorPage() {
   const [formValues, setFormValues] = useState<CalculatorFormValues | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
-  
+
   useIframeResize();
 
   const handleExportPDF = async () => {
     if (!result || !formValues) return;
-    
+
     setIsExporting(true);
     try {
       const blob = await pdf(
@@ -33,7 +33,7 @@ export default function CalculatorPage() {
           roomKeys={formValues.roomKeys || 50}
         />
       ).toBlob();
-      
+
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
@@ -51,13 +51,13 @@ export default function CalculatorPage() {
 
   const handleSubmit = (values: CalculatorFormValues) => {
     setIsCalculating(true);
-    
+
     setTimeout(() => {
       const calculatedResult = calculatePCC(values);
       setResult(calculatedResult);
       setFormValues(values);
       setIsCalculating(false);
-      
+
       setTimeout(() => {
         document.getElementById('results')?.scrollIntoView({ 
           behavior: 'smooth', 
@@ -69,14 +69,14 @@ export default function CalculatorPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-5xl mx-auto px-4 md:px-6 lg:px-8 py-12 md:py-16">
+      <div className="max-w-5xl mx-auto px-4 md:px-6 lg:px-8 py-8 md:py-16 overflow-x-hidden">
         <div className="space-y-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Card className="p-8">
+            <Card className="p-5 sm:p-6 md:p-8">
               <div className="space-y-2 mb-6">
                 <h2 className="text-2xl font-semibold">Enter Your Details</h2>
                 <p className="text-sm text-muted-foreground">
@@ -102,7 +102,7 @@ export default function CalculatorPage() {
                 </Button>
               </div>
               <ScoreDisplay score={result.pccScore} pixiCost={result.pixiCost} />
-              
+
               <div className="space-y-4">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -114,7 +114,7 @@ export default function CalculatorPage() {
                     Understanding the potential impact a poor Travel Content Health score has on your business
                   </p>
                 </motion.div>
-                
+
                 <MetricsBreakdown
                   laborCostDrain={result.laborCostDrain}
                   totalOpportunity={result.totalOpportunity}
@@ -134,7 +134,7 @@ export default function CalculatorPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.2 }}
               >
-                <Card className="p-12 md:p-16 text-center bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5 border-primary/20 shadow-lg">
+                <Card className="p-6 sm:p-10 md:p-16 text-center bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5 border-primary/20 shadow-lg">
                   <div className="space-y-6">
                     <h3 className="text-3xl md:text-4xl font-bold">Ready to Improve Your Score?</h3>
                     <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
